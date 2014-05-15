@@ -4,9 +4,11 @@ import lombok.Data;
 
 @Data
 public class SampleBean {
-  private String id;
+  private Integer id;
+  private String name;
 
-  public SampleBean(String id) {
+  public SampleBean(Integer id, String name) {
     this.id = id;
+    this.name = name;
   }
 }

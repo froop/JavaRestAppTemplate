@@ -22,13 +22,13 @@ public class SampleResource {
   @GET
   @Produces(APPLICATION_JSON)
   public List<SampleBean> getList() {
-    return Arrays.asList(new SampleBean("1"), new SampleBean("2"));
+    return Arrays.asList(new SampleBean(1, "name1"), new SampleBean(2, "name2"));
   }
 
   @GET
   @Path("{id}")
   @Produces(APPLICATION_JSON)
-  public SampleBean getItem(@PathParam("id") String id) {
-    return new SampleBean(id);
+  public SampleBean getItem(@PathParam("id") Integer id) {
+    return new SampleBean(id, "name" + id);
   }
 }
