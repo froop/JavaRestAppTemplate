@@ -1,12 +1,11 @@
 package froop.rest;
 
-import com.sun.jersey.api.core.PackagesResourceConfig;
-import com.sun.jersey.api.core.ResourceConfig;
-import com.sun.jersey.api.json.JSONConfiguration;
-import com.sun.jersey.spi.container.servlet.ServletContainer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.glassfish.jersey.jackson.JacksonFeature;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.servlet.ServletContainer;
 
 class JettyServer {
 
@@ -32,9 +31,10 @@ class JettyServer {
   }
 
   private void setupRest() {
-    ResourceConfig config = new PackagesResourceConfig("froop.rest.resource");
-    config.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, true);
-   ServletHolder holder =  new ServletHolder(new ServletContainer(config));
+    ResourceConfig config = new ResourceConfig()
+        .packages("froop.rest.resource")
+        .register(JacksonFeature.class);
+    ServletHolder holder =  new ServletHolder(new ServletContainer(config));
     holder.setInitOrder(1);
     context.addServlet(holder, "/api/*");
   }
