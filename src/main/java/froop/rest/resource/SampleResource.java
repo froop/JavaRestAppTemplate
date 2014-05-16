@@ -1,9 +1,6 @@
 package froop.rest.resource;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,5 +27,11 @@ public class SampleResource {
   @Produces(APPLICATION_JSON)
   public SampleBean getItem(@PathParam("id") Integer id) {
     return new SampleBean(id, "name" + id);
+  }
+
+  @POST
+  @Consumes(APPLICATION_JSON)
+  public void create(SampleBean item) {
+    System.out.println(item);
   }
 }
