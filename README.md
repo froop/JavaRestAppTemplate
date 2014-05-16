@@ -21,3 +21,4 @@ JettyServer.main() を Run して、
 * GET http://localhost:8080/api/samples/text
 * POST http://localhost:8080/api/samples
 * PUT http://localhost:8080/api/samples/1
+* DELETE http://localhost:8080/api/samples/1

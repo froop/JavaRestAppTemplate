@@ -41,4 +41,10 @@ public class SampleResource {
   public void update(@PathParam("id") Integer id, SampleBean item) {
     System.out.println("PUT: id=" + id + ", " + item);
   }
+
+  @DELETE
+  @Path("{id}")
+  public void delete(@PathParam("id") Integer id) {
+    System.out.println("DELETE: id=" + id);
+  }
 }
