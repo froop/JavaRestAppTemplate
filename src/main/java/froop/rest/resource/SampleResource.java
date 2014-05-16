@@ -32,6 +32,13 @@ public class SampleResource {
   @POST
   @Consumes(APPLICATION_JSON)
   public void create(SampleBean item) {
-    System.out.println(item);
+    System.out.println("POST: " + item);
+  }
+
+  @PUT
+  @Path("{id}")
+  @Consumes(APPLICATION_JSON)
+  public void update(@PathParam("id") Integer id, SampleBean item) {
+    System.out.println("PUT: id=" + id + ", " + item);
   }
 }
