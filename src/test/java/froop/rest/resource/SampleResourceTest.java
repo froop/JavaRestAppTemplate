@@ -6,17 +6,16 @@ import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
 import org.junit.Test;
 
-import javax.json.JsonArray;
-import javax.json.JsonValue;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
-import java.util.Iterator;
+import java.util.Arrays;
+import java.util.List;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
 public class SampleResourceTest extends JerseyTest {
@@ -37,23 +36,17 @@ public class SampleResourceTest extends JerseyTest {
 
   @Test
   public void testGetList() throws Exception {
-    JsonArray res = target("samples").request(APPLICATION_JSON).get(JsonArray.class);
+    GenericType<List<SampleBean>> listType = new GenericType<List<SampleBean>>() {};
+    List res = target("samples").register(JacksonFeature.class).request(APPLICATION_JSON).get(listType);
 
-    Iterator<JsonValue> it = res.iterator();
-    assertItem(it.next().toString(), 1, "name1");
-    assertItem(it.next().toString(), 2, "name2");
-    assertFalse(it.hasNext());
-  }
+    assertThat(res, is(Arrays.asList(new SampleBean(1, "name1"), new SampleBean(2, "name2"))));
+ }
 
   @Test
   public void testGetItem() throws Exception {
     SampleBean res = target("samples/1").register(JacksonFeature.class).request(APPLICATION_JSON).get(SampleBean.class);
 
     assertThat(res, is(new SampleBean(1, "name1")));
-  }
-
-  private void assertItem(String json, int id, String name) {
-    assertThat(json, is("{\"id\":" + id + ",\"name\":\"" + name + "\"}"));
   }
 
   @Test
