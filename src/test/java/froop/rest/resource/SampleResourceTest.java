@@ -39,7 +39,7 @@ public class SampleResourceTest extends JerseyTest {
     List<SampleBean> res = target("samples").register(JacksonFeature.class)
         .request(APPLICATION_JSON).get(new SampleListType());
 
-    assertThat(res, is(Arrays.asList(new SampleBean(1, "name1"), new SampleBean(2, "name2"))));
+    assertThat(res, is(Arrays.asList(SampleBean.of(1, "name1"), SampleBean.of(2, "name2"))));
  }
 
   private static class SampleListType extends GenericType<List<SampleBean>> {
@@ -50,12 +50,12 @@ public class SampleResourceTest extends JerseyTest {
     SampleBean res = target("samples/1").register(JacksonFeature.class)
         .request(APPLICATION_JSON).get(SampleBean.class);
 
-    assertThat(res, is(new SampleBean(1, "name1")));
+    assertThat(res, is(SampleBean.of(1, "name1")));
   }
 
   @Test
   public void testCreate() throws Exception {
-    SampleBean req = new SampleBean(null, "new name");
+    SampleBean req = SampleBean.of(null, "new name");
 
     Response res = target("samples").register(JacksonFeature.class)
         .request().post(Entity.entity(req, APPLICATION_JSON));
@@ -65,7 +65,7 @@ public class SampleResourceTest extends JerseyTest {
 
   @Test
   public void testUpdate() throws Exception {
-    SampleBean req = new SampleBean(1, "name1b");
+    SampleBean req = SampleBean.of(1, "name1b");
 
     Response res = target("samples/1").register(JacksonFeature.class)
         .request().put(Entity.entity(req, APPLICATION_JSON));

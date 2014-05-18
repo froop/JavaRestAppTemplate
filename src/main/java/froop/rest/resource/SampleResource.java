@@ -19,14 +19,14 @@ public class SampleResource {
   @GET
   @Produces(APPLICATION_JSON)
   public List<SampleBean> getList() {
-    return Arrays.asList(new SampleBean(1, "name1"), new SampleBean(2, "name2"));
+    return Arrays.asList(SampleBean.of(1, "name1"), SampleBean.of(2, "name2"));
   }
 
   @GET
   @Path("{id}")
   @Produces(APPLICATION_JSON)
   public SampleBean getItem(@PathParam("id") Integer id) {
-    return new SampleBean(id, "name" + id);
+    return SampleBean.of(id, "name" + id);
   }
 
   @POST
