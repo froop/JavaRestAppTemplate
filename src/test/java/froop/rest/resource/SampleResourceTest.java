@@ -75,7 +75,7 @@ public class SampleResourceTest extends JerseyTest {
 
   @Test
   public void testDelete() throws Exception {
-    Response res = target("samples/1").register(JacksonFeature.class)
+    Response res = target("samples/1")
         .request().delete();
 
     assertThat(res.getStatus(), is(204));
