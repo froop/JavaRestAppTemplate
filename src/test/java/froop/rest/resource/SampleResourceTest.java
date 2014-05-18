@@ -36,15 +36,19 @@ public class SampleResourceTest extends JerseyTest {
 
   @Test
   public void testGetList() throws Exception {
-    GenericType<List<SampleBean>> listType = new GenericType<List<SampleBean>>() {};
-    List res = target("samples").register(JacksonFeature.class).request(APPLICATION_JSON).get(listType);
+    List<SampleBean> res = target("samples").register(JacksonFeature.class)
+        .request(APPLICATION_JSON).get(new SampleListType());
 
     assertThat(res, is(Arrays.asList(new SampleBean(1, "name1"), new SampleBean(2, "name2"))));
  }
 
+  private static class SampleListType extends GenericType<List<SampleBean>> {
+  }
+
   @Test
   public void testGetItem() throws Exception {
-    SampleBean res = target("samples/1").register(JacksonFeature.class).request(APPLICATION_JSON).get(SampleBean.class);
+    SampleBean res = target("samples/1").register(JacksonFeature.class)
+        .request(APPLICATION_JSON).get(SampleBean.class);
 
     assertThat(res, is(new SampleBean(1, "name1")));
   }
@@ -53,7 +57,8 @@ public class SampleResourceTest extends JerseyTest {
   public void testCreate() throws Exception {
     SampleBean req = new SampleBean(null, "new name");
 
-    Response res = target("samples").register(JacksonFeature.class).request().post(Entity.entity(req, APPLICATION_JSON));
+    Response res = target("samples").register(JacksonFeature.class)
+        .request().post(Entity.entity(req, APPLICATION_JSON));
 
     assertThat(res.getStatus(), is(204));
   }
@@ -62,14 +67,16 @@ public class SampleResourceTest extends JerseyTest {
   public void testUpdate() throws Exception {
     SampleBean req = new SampleBean(1, "name1b");
 
-    Response res = target("samples/1").register(JacksonFeature.class).request().put(Entity.entity(req, APPLICATION_JSON));
+    Response res = target("samples/1").register(JacksonFeature.class)
+        .request().put(Entity.entity(req, APPLICATION_JSON));
 
     assertThat(res.getStatus(), is(204));
   }
 
   @Test
   public void testDelete() throws Exception {
-    Response res = target("samples/1").register(JacksonFeature.class).request().delete();
+    Response res = target("samples/1").register(JacksonFeature.class)
+        .request().delete();
 
     assertThat(res.getStatus(), is(204));
   }
