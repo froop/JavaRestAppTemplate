@@ -1,7 +1,7 @@
 JavaRestAppTemplate
 ====================
 
-Template of REST Application for Java.
+Template of REST Server Application for Java.
 
 
 Uses Libraries
@@ -14,7 +14,7 @@ Uses Libraries
 Usage
 --------------------
 
-JettyServer.main() を Run して、
+JettyServer.main() を Run してブラウザからアクセス。
 
 * GET http://localhost:8080/api/samples
 * GET http://localhost:8080/api/samples/1
