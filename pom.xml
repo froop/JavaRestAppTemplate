@@ -73,5 +73,11 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.test-framework.providers</groupId>
+      <artifactId>jersey-test-framework-provider-bundle</artifactId>
+      <version>${jerseyVersion}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 </project>
