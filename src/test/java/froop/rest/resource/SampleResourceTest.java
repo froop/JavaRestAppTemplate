@@ -37,7 +37,7 @@ public class SampleResourceTest extends JerseyTest {
 
   @Test
   public void testGetList() throws Exception {
-    JsonArray res = target("samples").request().accept(APPLICATION_JSON).get(JsonArray.class);
+    JsonArray res = target("samples").request(APPLICATION_JSON).get(JsonArray.class);
 
     Iterator<JsonValue> it = res.iterator();
     assertItem(it.next().toString(), 1, "name1");
@@ -47,9 +47,9 @@ public class SampleResourceTest extends JerseyTest {
 
   @Test
   public void testGetItem() throws Exception {
-    String res = target("samples/1").request().accept(APPLICATION_JSON).get(String.class);
+    SampleBean res = target("samples/1").register(JacksonFeature.class).request(APPLICATION_JSON).get(SampleBean.class);
 
-    assertItem(res, 1, "name1");
+    assertThat(res, is(new SampleBean(1, "name1")));
   }
 
   private void assertItem(String json, int id, String name) {
