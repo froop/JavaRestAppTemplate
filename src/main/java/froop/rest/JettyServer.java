@@ -7,7 +7,7 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
-class JettyServer {
+public class JettyServer {
 
   public static void main(String[] args) {
     JettyServer server = new JettyServer(8080);
