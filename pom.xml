@@ -13,7 +13,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jettyVersion>9.1.5.v20140505</jettyVersion>
-    <jerseyVersion>2.8</jerseyVersion>
+    <jerseyVersion>2.9</jerseyVersion>
   </properties>
 
   <build>
